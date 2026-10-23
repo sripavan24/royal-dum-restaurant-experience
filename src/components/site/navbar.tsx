@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LogOut, Menu as MenuIcon, ShoppingCart, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -198,6 +199,3 @@ export function Navbar() {
     </header>
   );
 }
-
-// Imported here (bottom) to keep the top import list focused on UI primitives.
-import { toast } from "sonner";
