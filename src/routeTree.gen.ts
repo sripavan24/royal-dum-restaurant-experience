@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteCartRouteImport } from './routes/_site.cart'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
 import { Route as SiteMenuRouteImport } from './routes/_site.menu'
 import { Route as SiteStoryRouteImport } from './routes/_site.story'
@@ -22,6 +23,11 @@ const SiteRoute = SiteRouteImport.update({
 const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCartRoute = SiteCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteContactRoute = SiteContactRouteImport.update({
@@ -42,11 +48,13 @@ const SiteStoryRoute = SiteStoryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
+  '/cart': typeof SiteCartRoute
   '/contact': typeof SiteContactRoute
   '/menu': typeof SiteMenuRoute
   '/story': typeof SiteStoryRoute
 }
 export interface FileRoutesByTo {
+  '/cart': typeof SiteCartRoute
   '/contact': typeof SiteContactRoute
   '/menu': typeof SiteMenuRoute
   '/story': typeof SiteStoryRoute
@@ -55,6 +63,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
+  '/_site/cart': typeof SiteCartRoute
   '/_site/contact': typeof SiteContactRoute
   '/_site/menu': typeof SiteMenuRoute
   '/_site/story': typeof SiteStoryRoute
@@ -62,12 +71,13 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/menu' | '/story'
+  fullPaths: '/' | '/cart' | '/contact' | '/menu' | '/story'
   fileRoutesByTo: FileRoutesByTo
-  to: '/contact' | '/menu' | '/story' | '/'
+  to: '/cart' | '/contact' | '/menu' | '/story' | '/'
   id:
     | '__root__'
     | '/_site'
+    | '/_site/cart'
     | '/_site/contact'
     | '/_site/menu'
     | '/_site/story'
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/cart': {
+      id: '/_site/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof SiteCartRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/contact': {
@@ -119,6 +136,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface SiteRouteChildren {
+  SiteCartRoute: typeof SiteCartRoute
   SiteContactRoute: typeof SiteContactRoute
   SiteMenuRoute: typeof SiteMenuRoute
   SiteStoryRoute: typeof SiteStoryRoute
@@ -126,6 +144,7 @@ interface SiteRouteChildren {
 }
 
 const SiteRouteChildren: SiteRouteChildren = {
+  SiteCartRoute: SiteCartRoute,
   SiteContactRoute: SiteContactRoute,
   SiteMenuRoute: SiteMenuRoute,
   SiteStoryRoute: SiteStoryRoute,
