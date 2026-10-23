@@ -8,24 +8,24 @@ import type { MenuItem, Order, OrderStatus } from "@/lib/types";
  * a matter of replacing the stubs — no component changes needed.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
+const API_BASE_URL: string = import.meta.env["VITE_API_BASE_URL"] ?? "/api";
 
 interface RequestOptions {
-  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | undefined;
   body?: unknown;
-  token?: string;
+  token?: string | undefined;
 }
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
-  if (options.token) headers.Authorization = `Bearer ${options.token}`;
+  if (options.token) headers["Authorization"] = `Bearer ${options.token}`;
 
   const res = await fetch(`${API_BASE_URL}${path}`, {
     method: options.method ?? "GET",
     headers,
-    body: options.body === undefined ? undefined : JSON.stringify(options.body),
+    body: options.body === undefined ? null : JSON.stringify(options.body),
   });
 
   if (!res.ok) {

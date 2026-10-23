@@ -27,8 +27,8 @@ export interface MenuItem {
   isVeg: boolean;
   isBestseller: boolean;
   isAvailable: boolean;
-  portions?: PortionOption[];
-  spiceLevels?: string[];
+  portions?: PortionOption[] | undefined;
+  spiceLevels?: string[] | undefined;
 }
 
 export interface CartItem {
@@ -39,8 +39,8 @@ export interface CartItem {
   isVeg: boolean;
   basePrice: number;
   unitPrice: number;
-  portion?: string;
-  spiceLevel?: string;
+  portion?: string | undefined;
+  spiceLevel?: string | undefined;
   quantity: number;
 }
 
@@ -57,15 +57,15 @@ export interface OrderItem {
   name: string;
   quantity: number;
   unitPrice: number;
-  portion?: string;
-  spiceLevel?: string;
+  portion?: string | undefined;
+  spiceLevel?: string | undefined;
 }
 
 export interface OrderCustomer {
   name: string;
   phone: string;
-  email?: string;
-  notes?: string;
+  email?: string | undefined;
+  notes?: string | undefined;
 }
 
 export interface Order {
@@ -84,7 +84,7 @@ export interface Order {
 export interface DemoUser {
   name: string;
   email: string;
-  phone?: string;
+  phone?: string | undefined;
 }
 
 export interface CustomerRecord {

@@ -51,10 +51,9 @@ function MenuPage() {
 
   // Brief skeleton while demo data hydrates — mirrors a real API fetch.
   useEffect(() => {
-    if (hydrated) {
-      const t = setTimeout(() => setLoading(false), 350);
-      return () => clearTimeout(t);
-    }
+    if (!hydrated) return;
+    const t = setTimeout(() => setLoading(false), 350);
+    return () => clearTimeout(t);
   }, [hydrated]);
 
   const filtered = useMemo(() => {
