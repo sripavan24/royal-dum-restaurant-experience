@@ -15,7 +15,10 @@ import { Route as SiteBookingSuccessRouteImport } from './routes/_site.booking-s
 import { Route as SiteCartRouteImport } from './routes/_site.cart'
 import { Route as SiteCheckoutRouteImport } from './routes/_site.checkout'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
+import { Route as SiteLoginRouteImport } from './routes/_site.login'
 import { Route as SiteMenuRouteImport } from './routes/_site.menu'
+import { Route as SiteMyOrdersRouteImport } from './routes/_site.my-orders'
+import { Route as SiteRegisterRouteImport } from './routes/_site.register'
 import { Route as SiteStoryRouteImport } from './routes/_site.story'
 
 const SiteRoute = SiteRouteImport.update({
@@ -47,9 +50,24 @@ const SiteContactRoute = SiteContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteLoginRoute = SiteLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteMenuRoute = SiteMenuRouteImport.update({
   id: '/menu',
   path: '/menu',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteMyOrdersRoute = SiteMyOrdersRouteImport.update({
+  id: '/my-orders',
+  path: '/my-orders',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteRegisterRoute = SiteRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteStoryRoute = SiteStoryRouteImport.update({
@@ -64,7 +82,10 @@ export interface FileRoutesByFullPath {
   '/cart': typeof SiteCartRoute
   '/checkout': typeof SiteCheckoutRoute
   '/contact': typeof SiteContactRoute
+  '/login': typeof SiteLoginRoute
   '/menu': typeof SiteMenuRoute
+  '/my-orders': typeof SiteMyOrdersRoute
+  '/register': typeof SiteRegisterRoute
   '/story': typeof SiteStoryRoute
 }
 export interface FileRoutesByTo {
@@ -72,7 +93,10 @@ export interface FileRoutesByTo {
   '/cart': typeof SiteCartRoute
   '/checkout': typeof SiteCheckoutRoute
   '/contact': typeof SiteContactRoute
+  '/login': typeof SiteLoginRoute
   '/menu': typeof SiteMenuRoute
+  '/my-orders': typeof SiteMyOrdersRoute
+  '/register': typeof SiteRegisterRoute
   '/story': typeof SiteStoryRoute
   '/': typeof SiteIndexRoute
 }
@@ -83,7 +107,10 @@ export interface FileRoutesById {
   '/_site/cart': typeof SiteCartRoute
   '/_site/checkout': typeof SiteCheckoutRoute
   '/_site/contact': typeof SiteContactRoute
+  '/_site/login': typeof SiteLoginRoute
   '/_site/menu': typeof SiteMenuRoute
+  '/_site/my-orders': typeof SiteMyOrdersRoute
+  '/_site/register': typeof SiteRegisterRoute
   '/_site/story': typeof SiteStoryRoute
   '/_site/': typeof SiteIndexRoute
 }
@@ -95,7 +122,10 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/contact'
+    | '/login'
     | '/menu'
+    | '/my-orders'
+    | '/register'
     | '/story'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -103,7 +133,10 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/contact'
+    | '/login'
     | '/menu'
+    | '/my-orders'
+    | '/register'
     | '/story'
     | '/'
   id:
@@ -113,7 +146,10 @@ export interface FileRouteTypes {
     | '/_site/cart'
     | '/_site/checkout'
     | '/_site/contact'
+    | '/_site/login'
     | '/_site/menu'
+    | '/_site/my-orders'
+    | '/_site/register'
     | '/_site/story'
     | '/_site/'
   fileRoutesById: FileRoutesById
@@ -166,11 +202,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteContactRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/login': {
+      id: '/_site/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof SiteLoginRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/menu': {
       id: '/_site/menu'
       path: '/menu'
       fullPath: '/menu'
       preLoaderRoute: typeof SiteMenuRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/my-orders': {
+      id: '/_site/my-orders'
+      path: '/my-orders'
+      fullPath: '/my-orders'
+      preLoaderRoute: typeof SiteMyOrdersRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/register': {
+      id: '/_site/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof SiteRegisterRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/story': {
@@ -188,7 +245,10 @@ interface SiteRouteChildren {
   SiteCartRoute: typeof SiteCartRoute
   SiteCheckoutRoute: typeof SiteCheckoutRoute
   SiteContactRoute: typeof SiteContactRoute
+  SiteLoginRoute: typeof SiteLoginRoute
   SiteMenuRoute: typeof SiteMenuRoute
+  SiteMyOrdersRoute: typeof SiteMyOrdersRoute
+  SiteRegisterRoute: typeof SiteRegisterRoute
   SiteStoryRoute: typeof SiteStoryRoute
   SiteIndexRoute: typeof SiteIndexRoute
 }
@@ -198,7 +258,10 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteCartRoute: SiteCartRoute,
   SiteCheckoutRoute: SiteCheckoutRoute,
   SiteContactRoute: SiteContactRoute,
+  SiteLoginRoute: SiteLoginRoute,
   SiteMenuRoute: SiteMenuRoute,
+  SiteMyOrdersRoute: SiteMyOrdersRoute,
+  SiteRegisterRoute: SiteRegisterRoute,
   SiteStoryRoute: SiteStoryRoute,
   SiteIndexRoute: SiteIndexRoute,
 }
