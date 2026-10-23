@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteBookingSuccessRouteImport } from './routes/_site.booking-success'
 import { Route as SiteCartRouteImport } from './routes/_site.cart'
+import { Route as SiteCheckoutRouteImport } from './routes/_site.checkout'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
 import { Route as SiteMenuRouteImport } from './routes/_site.menu'
 import { Route as SiteStoryRouteImport } from './routes/_site.story'
@@ -25,9 +27,19 @@ const SiteIndexRoute = SiteIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteBookingSuccessRoute = SiteBookingSuccessRouteImport.update({
+  id: '/booking-success',
+  path: '/booking-success',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteCartRoute = SiteCartRouteImport.update({
   id: '/cart',
   path: '/cart',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCheckoutRoute = SiteCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteContactRoute = SiteContactRouteImport.update({
@@ -48,13 +60,17 @@ const SiteStoryRoute = SiteStoryRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
+  '/booking-success': typeof SiteBookingSuccessRoute
   '/cart': typeof SiteCartRoute
+  '/checkout': typeof SiteCheckoutRoute
   '/contact': typeof SiteContactRoute
   '/menu': typeof SiteMenuRoute
   '/story': typeof SiteStoryRoute
 }
 export interface FileRoutesByTo {
+  '/booking-success': typeof SiteBookingSuccessRoute
   '/cart': typeof SiteCartRoute
+  '/checkout': typeof SiteCheckoutRoute
   '/contact': typeof SiteContactRoute
   '/menu': typeof SiteMenuRoute
   '/story': typeof SiteStoryRoute
@@ -63,7 +79,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
+  '/_site/booking-success': typeof SiteBookingSuccessRoute
   '/_site/cart': typeof SiteCartRoute
+  '/_site/checkout': typeof SiteCheckoutRoute
   '/_site/contact': typeof SiteContactRoute
   '/_site/menu': typeof SiteMenuRoute
   '/_site/story': typeof SiteStoryRoute
@@ -71,13 +89,29 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cart' | '/contact' | '/menu' | '/story'
+  fullPaths:
+    | '/'
+    | '/booking-success'
+    | '/cart'
+    | '/checkout'
+    | '/contact'
+    | '/menu'
+    | '/story'
   fileRoutesByTo: FileRoutesByTo
-  to: '/cart' | '/contact' | '/menu' | '/story' | '/'
+  to:
+    | '/booking-success'
+    | '/cart'
+    | '/checkout'
+    | '/contact'
+    | '/menu'
+    | '/story'
+    | '/'
   id:
     | '__root__'
     | '/_site'
+    | '/_site/booking-success'
     | '/_site/cart'
+    | '/_site/checkout'
     | '/_site/contact'
     | '/_site/menu'
     | '/_site/story'
@@ -104,11 +138,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteIndexRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/_site/booking-success': {
+      id: '/_site/booking-success'
+      path: '/booking-success'
+      fullPath: '/booking-success'
+      preLoaderRoute: typeof SiteBookingSuccessRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_site/cart': {
       id: '/_site/cart'
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof SiteCartRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/checkout': {
+      id: '/_site/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof SiteCheckoutRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/contact': {
@@ -136,7 +184,9 @@ declare module '@tanstack/react-router' {
 }
 
 interface SiteRouteChildren {
+  SiteBookingSuccessRoute: typeof SiteBookingSuccessRoute
   SiteCartRoute: typeof SiteCartRoute
+  SiteCheckoutRoute: typeof SiteCheckoutRoute
   SiteContactRoute: typeof SiteContactRoute
   SiteMenuRoute: typeof SiteMenuRoute
   SiteStoryRoute: typeof SiteStoryRoute
@@ -144,7 +194,9 @@ interface SiteRouteChildren {
 }
 
 const SiteRouteChildren: SiteRouteChildren = {
+  SiteBookingSuccessRoute: SiteBookingSuccessRoute,
   SiteCartRoute: SiteCartRoute,
+  SiteCheckoutRoute: SiteCheckoutRoute,
   SiteContactRoute: SiteContactRoute,
   SiteMenuRoute: SiteMenuRoute,
   SiteStoryRoute: SiteStoryRoute,
